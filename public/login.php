@@ -2,7 +2,6 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-session_start();
 include('../src/config/pg_config.php');
 ?>
 
@@ -21,7 +20,7 @@ include('../src/config/pg_config.php');
 <div class="form">
     <span class="title">Entrar</span>
 
-    <form action="../src/function/loginfunction.php" method="POST">
+    <form action="../src/function/testlogin.php" method="POST">
         <input type="hidden" name="redirect" value="<?php echo isset($_GET['redirect']) ? $_GET['redirect'] : ''; ?>">
                     
         <div class="input-field">

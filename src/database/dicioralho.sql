@@ -1,29 +1,32 @@
 -- Script de Criação da database do Dicioralho para PostgreSQL
 
-CREATE DATABASE dicioralho;
-\c dicioralho;
+-- CREATE DATABASE dicioralho;
+-- \c dicioralho;
 
 CREATE TABLE usuarios (
-    id VARCHAR(12) PRIMARY KEY UNIQUE,
+    idusuario VARCHAR(12) PRIMARY KEY UNIQUE,
     nomeusuario VARCHAR(255) NOT NULL,
-    emailusuario VARCHAR(255) NOT NULL UNIQUE,
+    emailusuario VARCHAR(255) NOT NULL,
     senhausuario VARCHAR(255) NOT NULL,
     registrousuario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    instituicaousuario VARCHAR(255) NOT NULL,
-    documentousuario VARCHAR(255) NOT NULL,
-    matriculausuario VARCHAR(50) NOT NULL UNIQUE,
-    nivelusuario VARCHAR(20) NOT NULL CHECK (nivelusuario IN ('administrador', 'professor', 'aluno', 'user')),
-    statususuario VARCHAR(20) DEFAULT 'ativo';
+    instituicaousuario VARCHAR(255),
+    documentousuario BYTEA,
+    matriculausuario VARCHAR(50),
+    nivelusuario INT DEFAULT 0,
+    statususuario VARCHAR(20) CHECK (statususuario IN ('ativo', 'pendente', 'desativado')) DEFAULT 'pendente'
 );
 
 CREATE TABLE palavras (
-    id VARCHAR(12) PRIMARY KEY,
+    idpalavra VARCHAR(12) PRIMARY KEY,
+    idusuario VARCHAR(12) NOT NULL,
+    idtarefa VARCHAR(16),
     nomepalavra VARCHAR(255) NOT NULL,
     descpalavra TEXT NOT NULL,
     categoria VARCHAR(50),
-    registrousuario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    tagspalavra VARCHAR(255),
+    avaliaçãopalavra INT CHECK (avaliaçãopalavra BETWEEN 0 AND 100),
 
-
-    statuspalavra VARCHAR(20) DEFAULT 'ativa',
-    usuario_id VARCHAR(12) REFERENCES usuarios(id) ON DELETE CASCADE
+    dataregistropalavra TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    statuspalavra VARCHAR(20) CHECK (statususuario IN ('ativo', 'pendente', 'desativado')) DEFAULT 'pendente',
+    FOREIGN KEY idusuario REFERENCES usuarios(idusuario) ON DELETE CASCADE
 );

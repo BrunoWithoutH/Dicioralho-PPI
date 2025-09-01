@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 include("../src/config/pg_config.php");
-require '../vendor/autoload.php'; // Isso aq é o Nanoid, uma biblioteca pra gerar IDs únicos que eu achei
+require '../vendor/autoload.php';
 use Hidehalo\Nanoid\Client;
 
 if (isset($_POST["submit"])) {
@@ -13,13 +13,12 @@ if (isset($_POST["submit"])) {
         $email = $_POST["email"];
         $senha = $_POST["senha"];
 
-        $senha_hash = password_hash($senha, PASSWORD_DEFAULT); // Isso aqui é pra criptografar a senha antes de salvar no banco
-
+        $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
         $client = new Client();
-        $user_id = $client->generateId(12); // Isso aquei gera um ID único com 12 caracteres
+        $user_id = $client->generateId(12);
 
         try {
-            $stmt = $pdo->prepare("INSERT INTO usuarios (id, nomeusuario, emailusuario, senhausuario) 
+            $stmt = $pdo->prepare("INSERT INTO usuarios (idusuario, nomeusuario, emailusuario, senhausuario) 
                                    VALUES (:id, :nome, :email, :senha)");
             $stmt->bindParam(':id', $user_id);
             $stmt->bindParam(':nome', $nome);

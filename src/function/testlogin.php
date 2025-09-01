@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-include("pg_config.php");
+include("../config/pg_config.php");
 
 if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha'])) {
     $email = $_POST["email"];
@@ -18,9 +18,9 @@ if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha']
         session_start();
         $_SESSION['EmailUsuario'] = $user['emailusuario'];
         $_SESSION['NomeUsuario'] = $user['nomeusuario'];
-        $_SESSION['IdUsuario'] = $user['id'];
+        $_SESSION['IdUsuario'] = $user['idusuario'];
 
-        $redirectUrl = $_SESSION['previous_page'] ?? '../../public/home.php';
+        $redirectUrl = $_SESSION['previous_page'] ?? '../../public/index.php';
         unset($_SESSION['previous_page']);
         header('Location: ' . $redirectUrl);
         exit();
