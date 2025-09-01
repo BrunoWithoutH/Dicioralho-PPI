@@ -69,7 +69,7 @@ if (isset($_SESSION['EmailUsuario'])) {
     <meta charset="UTF-8">
     <title>Gerenciar Usuários</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/gerenciar.css">
+    <link rel="stylesheet" href="../assets/css/gerenciarusuarios.css">
 </head>
 <body>
     <div class="container-fluid">
@@ -78,7 +78,7 @@ if (isset($_SESSION['EmailUsuario'])) {
                 <section class="header">
                     <nav>
                         <a href="../index.php"><img src="assets/img/logo.png" alt="Dicioralho" class="logo"></a>
-                        <?php switch ($nivelusuario ?? '') {
+                        <?php switch ($nivelusuario ?? '') { 
                             case 'Administrador': ?>
                                 <div class="dropdown">
                                     <button class="dropbtn">Administrador<i class="uil uil-angle-down"></i></button>

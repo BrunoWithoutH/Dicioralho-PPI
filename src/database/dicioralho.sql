@@ -18,13 +18,14 @@ CREATE TABLE usuarios (
 
 CREATE TABLE palavras (
     idpalavra VARCHAR(12) PRIMARY KEY,
+    idprofessor VARCHAR(12) NOT NULL,
     idusuario VARCHAR(12) NOT NULL,
     idtarefa VARCHAR(16),
     nomepalavra VARCHAR(255) NOT NULL,
     descpalavra TEXT NOT NULL,
     categoria VARCHAR(50),
     tagspalavra VARCHAR(255),
-    avaliaçãopalavra INT CHECK (avaliaçãopalavra BETWEEN 0 AND 100),
+    avaliacaopalavra INT CHECK (avaliaçãopalavra BETWEEN 0 AND 100),
 
     dataregistropalavra TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     statuspalavra VARCHAR(20) CHECK (statususuario IN ('ativo', 'pendente', 'desativado')) DEFAULT 'pendente',
