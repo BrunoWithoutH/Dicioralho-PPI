@@ -38,7 +38,7 @@ $tipos = [
 ];
 $usuariosPorTipo = [3 => [], 2 => [], 1 => [], 0 => []];
 foreach ($usuarios as $u) {
-    $nivel = (int)$u['nivelusuario'];
+    $nivel = (int) $u['nivelusuario'];
     $usuariosPorTipo[$nivel][] = $u;
 }
 if (isset($_SESSION['EmailUsuario'])) {
@@ -65,12 +65,14 @@ if (isset($_SESSION['EmailUsuario'])) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Gerenciar Usuários</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/gerenciarusuarios.css">
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row">
@@ -78,7 +80,7 @@ if (isset($_SESSION['EmailUsuario'])) {
                 <section class="header">
                     <nav>
                         <a href="../index.php"><img src="assets/img/logo.png" alt="Dicioralho" class="logo"></a>
-                        <?php switch ($nivelusuario ?? '') { 
+                        <?php switch ($nivelusuario ?? '') {
                             case 'Administrador': ?>
                                 <div class="dropdown">
                                     <button class="dropbtn">Administrador<i class="uil uil-angle-down"></i></button>
@@ -96,7 +98,7 @@ if (isset($_SESSION['EmailUsuario'])) {
                                         <a href="adicionarpalavras.php" class="NavItem">Adicionar Palavras</a>
                                     </div>
                                 </div>
-                            <?php
+                                <?php
                                 break;
                             case 'Professor': ?>
                                 <div class="dropdown">
@@ -113,7 +115,7 @@ if (isset($_SESSION['EmailUsuario'])) {
                                         <a href="adicionarpalavras.php" class="NavItem">Adicionar Palavras</a>
                                     </div>
                                 </div>
-                            <?php
+                                <?php
                                 break;
                             case 'Aluno': ?>
                                 <div class="dropdown">
@@ -123,17 +125,18 @@ if (isset($_SESSION['EmailUsuario'])) {
                                         <a href="gerenciartarefas.php" class="NavItem">Tarefas</a>
                                     </div>
                                 </div>
-                            <?php
+                                <?php
                                 break;
                             case 'Usuario Visitante':
-                                default:
+                            default:
                                 break;
                         } ?>
 
                         <div class="usersection">
                             <?php if ($email): ?>
                                 <div class="dropdown" style="float:right;">
-                                    <button class="dropbtnimg"><img class="userimage" src="assets/img/userdefault.svg" alt="user"></button>
+                                    <button class="dropbtnimg"><img class="userimage" src="assets/img/userdefault.svg"
+                                            alt="user"></button>
                                     <div class="dropdown-content" style="right: 0;">
                                         <a href="" class="NavItem">Configurações</a>
                                         <a href="../../src/function/logout.php">Sair</a>
@@ -159,7 +162,7 @@ if (isset($_SESSION['EmailUsuario'])) {
                             </a>
                         <?php endif; ?>
                     </div>
-                    
+
                     <div id="pendentesModal" class="modal">
                         <div class="modal-content">
                             <span class="close">&times;</span>
@@ -183,12 +186,17 @@ if (isset($_SESSION['EmailUsuario'])) {
                                                 <td><?php echo htmlspecialchars($pendente['emailusuario']); ?></td>
                                                 <td><?php echo htmlspecialchars($pendente['instituicaousuario'] ?? '-'); ?></td>
                                                 <td><?php echo $tipos[$pendente['nivelusuario']] ?? 'Visitante'; ?></td>
-                                                <td><?php echo date('d/m/Y H:i', strtotime($pendente['registrousuario'])); ?></td>
+                                                <td><?php echo date('d/m/Y H:i', strtotime($pendente['registrousuario'])); ?>
+                                                </td>
                                                 <td>
-                                                    <form action="../../src/function/processar_solicitacao.php" method="post" style="display:inline;">
-                                                        <input type="hidden" name="idusuario" value="<?php echo $pendente['idusuario']; ?>">
-                                                        <button type="submit" name="action" value="aprovar" class="btn-aprovar">Aprovar</button>
-                                                        <button type="submit" name="action" value="rejeitar" class="btn-rejeitar">Rejeitar</button>
+                                                    <form action="../../src/function/processar_solicitacao.php" method="post"
+                                                        style="display:inline;">
+                                                        <input type="hidden" name="idusuario"
+                                                            value="<?php echo $pendente['idusuario']; ?>">
+                                                        <button type="submit" name="action" value="aprovar"
+                                                            class="btn-aprovar">Aprovar</button>
+                                                        <button type="submit" name="action" value="rejeitar"
+                                                            class="btn-rejeitar">Rejeitar</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -200,7 +208,7 @@ if (isset($_SESSION['EmailUsuario'])) {
                             <?php endif; ?>
                         </div>
                     </div>
-                    
+
 
                     <div class="container mt-4" id="tipo-usuario-selector">
                         <h2>Selecione o tipo de usuário</h2>
@@ -239,11 +247,12 @@ if (isset($_SESSION['EmailUsuario'])) {
                 </section>
             </div>
         </div>
-        
+
     </div>
     <script>
-    const usuariosPorTipo = <?php echo json_encode($usuariosPorTipo); ?>;
-</script>
-<script src="../assets/js/gerenciarusuarios.js"></script>
+        const usuariosPorTipo = <?php echo json_encode($usuariosPorTipo); ?>;
+    </script>
+    <script src="../assets/js/gerenciarusuarios.js"></script>
 </body>
+
 </html>
