@@ -244,6 +244,6 @@ if (isset($_SESSION['EmailUsuario'])) {
     <script>
     const usuariosPorTipo = <?php echo json_encode($usuariosPorTipo); ?>;
 </script>
-<script src="../assets/js/usuarios.js"></script>
+<script src="../assets/js/gerenciarusuarios.js"></script>
 </body>
 </html>
